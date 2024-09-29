@@ -1,0 +1,19 @@
+import walletconnect as wc
+
+def connect_wallet():
+    session = wc.Session("YOUR_PROJECT_ID")
+    qr_code = session.get_connection_uri()
+    print("Scan this QR code with your WalletConnect mobile wallet:")
+    print(qr_code)
+    
+    session.connect()
+
+    if session.is_connected:
+        print(f"Connected with account: {session.accounts[0]}")
+        return session
+    else:
+        print("Connection failed.")
+        return None
+
+if __name__ == "__main__":
+    connect_wallet()
